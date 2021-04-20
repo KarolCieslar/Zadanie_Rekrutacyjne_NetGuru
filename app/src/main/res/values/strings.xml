@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ShoppingListV2</string>
+    <string name="nav_title_ShoppingList">Shopping List</string>
+    <string name="nav_title_ArchivedShoppingList">Archived Shopping List</string>
+</resources>

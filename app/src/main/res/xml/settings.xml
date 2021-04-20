@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:key="preferenceScreen">
+
+
+    <PreferenceCategory
+        android:key="phone"
+        android:title="WŁĄCZ LUB WYŁĄCZ APLIKACJĘ">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="disableapp"
+            android:summary="Odznacz te opcję jeśli chcesz aby aplikacja była wyłączona. Funkcja ta przydaje się w przypadku gdy chcesz na jakiś czas wyłączyć alarmy."
+            android:title="Czy aplikacja ma być włączona?" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="phone"
+        android:title="Ustawienia podstawowe">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="disableapp"
+            android:key="only_sms"
+            android:summary="W przypadku zaznaczenia tej opcji telefon będzie reagował jedynie na SMS z remizy. Natomiast gdy zadzwoni telefon z remizy alarm nie zostanie włączony."
+            android:title="Reaguj tylko na SMS?" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="disableapp"
+            android:key="switch_reaction"
+            android:summary="Włączenie tej opcji dodaje suwak na ekranie alarmu. Aby wyłączyć alarm będzie trzeba przesunąć palcem suwak od lewej do prawej. Gdy ta opcja jest odznaczona alarm wyłącza się po kliknięciu w ekran."
+            android:title="Suwak wyłączający alarm" />
+
+        <EditTextPreference
+            android:defaultValue="phoneNumber1"
+            android:dependency="disableapp"
+            android:key="phoneNumber1"
+            android:title="Telefon z remizy #1" />
+
+        <EditTextPreference
+            android:defaultValue="phoneNumber2"
+            android:dependency="disableapp"
+            android:key="phoneNumber2"
+            android:title="Telefon z remizy #2" />
+
+        <EditTextPreference
+            android:defaultValue="smsText"
+            android:dependency="disableapp"
+            android:key="smsText"
+            android:title="Tekst wiadomości SMS" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="alarm"
+        android:title="Ustawienia alarmu">
+
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dependency="disableapp"
+            android:key="alarm_vibration"
+            android:summary="Czy włączyć wibracje podczas alarmu?"
+            android:title="Wibracje" />
+
+        <ListPreference
+            android:defaultValue="1000"
+            android:dependency="alarm_vibration"
+            android:entries="@array/vibrationPower_name"
+            android:entryValues="@array/vibrationPower_value"
+            android:key="alarm_vibration_list"
+            android:summary="Wybierz siłę wibracji"
+            android:title="Wybierz siłę wybracji podczas alarmu" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dependency="disableapp"
+            android:key="alarm_sound"
+            android:summary="Czy włączyć dźwięk podczas alarmu?"
+            android:title="Dźwięk" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:dependency="alarm_sound"
+            android:entries="@array/alarmSound_name"
+            android:entryValues="@array/alarmSound_value"
+            android:key="alarm_sound_list"
+            android:summary="Wybierz dźwięk alarmu"
+            android:title="Wybierz dźwięk alarmu" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
+
+

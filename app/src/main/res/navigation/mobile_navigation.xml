@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_ShoppingList">
+
+    <fragment android:id="@+id/navigation_ShoppingList"
+    android:name="pl.globoox.shoppinglistv2.ui.ShoppingList.ShoppingListFragment"
+    android:label="@string/nav_title_ShoppingList"
+    tools:layout="@layout/fragment_shopping_list" />
+
+    <fragment
+        android:id="@+id/navigation_ArchivedShoppingList"
+        android:name="pl.globoox.shoppinglistv2.ui.ArchivedShoppingList.ArchivedShoppingListFragment"
+        android:label="@string/nav_title_ArchivedShoppingList"
+        tools:layout="@layout/fragment_archived_shopping_list" />
+</navigation>
