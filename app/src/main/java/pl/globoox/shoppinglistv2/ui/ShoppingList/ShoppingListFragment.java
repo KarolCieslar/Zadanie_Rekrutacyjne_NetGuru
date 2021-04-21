@@ -40,6 +40,7 @@ public class ShoppingListFragment extends Fragment {
                 ProgressBar progressBar_shopList = rootView.findViewById(R.id.progressBar_shopList);
                 progressBar_shopList.setVisibility(View.GONE);
 
+                // Get data from firebase database
                 for (DataSnapshot data : snapshot.getChildren()) {
                     ShoppingList newShopList = data.getValue(ShoppingList.class);
                     newShopList.setId(data.getKey());
@@ -53,7 +54,7 @@ public class ShoppingListFragment extends Fragment {
                     recyclerView_shoppingList.setAdapter(adapter);
                 }
 
-
+                // If list are empty swhow noData textView
                 if (listOfShoppingLists.size() == 0){
                     rootView.findViewById(R.id.textView_noData).setVisibility(View.VISIBLE);
                 }

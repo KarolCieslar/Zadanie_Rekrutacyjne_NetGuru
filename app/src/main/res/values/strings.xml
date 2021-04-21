@@ -2,4 +2,10 @@
     <string name="app_name">ShoppingListV2</string>
     <string name="nav_title_ShoppingList">Shopping List</string>
     <string name="nav_title_ArchivedShoppingList">Archived Shopping List</string>
+    <string name="listEmpty">This list does not have any item!</string>
+    <string name="archivedSuccessfull">Shop list succesfully archived!</string>
+    <string name="additem_emptyField">Field is empty!</string>
+    <string name="itemRemoved">Item has been removed!</string>
+    <string name="recoverAsk">Do You want to recover this list?</string>
+    <string name="recovered">List has been recovered!</string>
 </resources>

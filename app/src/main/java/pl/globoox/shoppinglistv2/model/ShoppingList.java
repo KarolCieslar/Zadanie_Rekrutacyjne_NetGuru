@@ -17,6 +17,15 @@ public class ShoppingList {
         return getItems().size();
     }
 
+    public void removeItem(String id) {
+        for (Map.Entry<String, Item> entry : this.items.entrySet()) {
+            if (entry.getValue().getId().equalsIgnoreCase(id)) {
+                items.remove(entry.getKey());
+            }
+        }
+        getItems();
+    }
+
     public String getId() {
         return id;
     }
@@ -51,14 +60,15 @@ public class ShoppingList {
 
     public List<Item> getItems() {
         List<Item> items = new ArrayList<>();
-        for (Map.Entry<String, Item> entry : this.items.entrySet()) {
-            Item item = entry.getValue();
-            item.setId(entry.getKey());
-            items.add(item);
+        if (this.items != null) {
+            for (Map.Entry<String, Item> entry : this.items.entrySet()) {
+                Item item = entry.getValue();
+                item.setId(entry.getKey());
+                items.add(item);
+            }
         }
         return items;
     }
-
 
     public int getDoneCount() {
         int i = 0;

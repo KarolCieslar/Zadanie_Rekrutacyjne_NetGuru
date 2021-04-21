@@ -4,53 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="7dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:background="@drawable/rounded_white_shape"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView_listName"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="NAZWA LISTY"
-            android:textSize="20sp" />
+            android:layout_margin="5dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true">
+            <TextView
+                android:id="@+id/textView_listName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:text="NAZWA LISTY"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button_archiveList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:text="ARCHIVE!" />
 
-            <Button
-                android:id="@+id/button_addItem"
-                android:layout_width="40dp"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_itemList"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+" />
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_margin="5dp"
+                android:layout_marginTop="10dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_itemList"
+            <TextView
+                android:id="@+id/textView_noItemsData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="20dp"
+                android:text="This list does not have any items. \n Add some by clicking to button \nin the top right corner."
+                android:textAlignment="center"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:layout_marginTop="10dp" />
-
-    <TextView
-        android:id="@+id/textView_noData"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="No data add some!"
-        android:visibility="gone" />
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_white_shape"
+        android:padding="7dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="30"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_add1ToValue"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="+" />
+
+            <TextView
+                android:id="@+id/textView_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:text="1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_remove1FromValue"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="-" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editText_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="45" />
+
+        <Button
+            android:id="@+id/button_addItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:text="ADD" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

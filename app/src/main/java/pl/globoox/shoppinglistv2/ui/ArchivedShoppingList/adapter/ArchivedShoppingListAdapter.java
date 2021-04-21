@@ -58,10 +58,10 @@ public class ArchivedShoppingListAdapter extends RecyclerView.Adapter<ArchivedSh
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setMessage("Przywrocic?")
-                        .setPositiveButton("ta!", new DialogInterface.OnClickListener() {
+                builder.setMessage(R.string.recoverAsk)
+                        .setPositiveButton("Yes!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(mContext, "Archived!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, R.string.recovered, Toast.LENGTH_SHORT).show();
                                 currentShopList.setArchived(false);
                                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("lists").child(currentShopList.getId()).child("archived");
                                 databaseReference.setValue(false);
@@ -70,7 +70,7 @@ public class ArchivedShoppingListAdapter extends RecyclerView.Adapter<ArchivedSh
                                 dialog.dismiss();
                             }
                         })
-                        .setNegativeButton("Nope", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Nope!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
                             }
