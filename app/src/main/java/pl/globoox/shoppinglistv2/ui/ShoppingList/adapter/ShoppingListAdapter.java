@@ -1,20 +1,16 @@
-package pl.globoox.shoppinglistv2.ui.ShoppingList;
+package pl.globoox.shoppinglistv2.ui.ShoppingList.adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -38,29 +34,36 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     @Override
     public ShoppingListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customlayout_shoplist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customlayout_shoplistelement, parent, false);
         return new ShoppingListAdapter.ViewHolder(view);
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull final ShoppingListAdapter.ViewHolder holder, final int position) {
-        holder.textView_name.setText(shoppingLists.get(position).getName());
-        holder.textView_createdTime.setText(shoppingLists.get(position).getCreatedTime());
-        holder.textView_doneCount.setText(String.valueOf(shoppingLists.get(position).getDoneCount()));
-        holder.textView_maxCount.setText(String.valueOf(shoppingLists.get(position).getItemsCount()));
+        final ShoppingList currentShopList = shoppingLists.get(position);
+        
+        holder.textView_name.setText(currentShopList.getName());
+        holder.textView_createdTime.setText(currentShopList.getCreatedTime());
+        holder.textView_doneCount.setText(String.valueOf(currentShopList.getDoneCount()));
+        holder.textView_maxCount.setText(String.valueOf(currentShopList.getItemsCount()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
                 LayoutInflater inflater = LayoutInflater.from(mContext);
-                final View dialogView = inflater.inflate(R.layout.dialog_rules, null);
+                final View dialogView = inflater.inflate(R.layout.dialog_listofitems, null);
                 mBuilder.setView(dialogView);
                 final AlertDialog dialog = mBuilder.create();
 
+                RecyclerView recyclerView_shoppingListDetails = dialogView.findViewById(R.id.recyclerView_itemList);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+                recyclerView_shoppingListDetails.setLayoutManager(layoutManager);
+                ItemListAdapter adapter = new ItemListAdapter(mContext, currentShopList.getItems(), currentShopList);
+                recyclerView_shoppingListDetails.setAdapter(adapter);
+
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                dialog.setCancelable(false);
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
             }

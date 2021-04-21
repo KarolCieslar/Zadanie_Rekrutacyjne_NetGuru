@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import pl.globoox.shoppinglistv2.R;
 import pl.globoox.shoppinglistv2.model.ShoppingList;
+import pl.globoox.shoppinglistv2.ui.ShoppingList.adapter.ShoppingListAdapter;
 
 public class ShoppingListFragment extends Fragment {
 
