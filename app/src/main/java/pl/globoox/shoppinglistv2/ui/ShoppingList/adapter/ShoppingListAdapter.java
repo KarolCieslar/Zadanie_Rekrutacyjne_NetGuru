@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -42,7 +46,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     @Override
     public void onBindViewHolder(@NonNull final ShoppingListAdapter.ViewHolder holder, final int position) {
         final ShoppingList currentShopList = shoppingLists.get(position);
-        
+
         holder.textView_name.setText(currentShopList.getName());
         holder.textView_createdTime.setText(currentShopList.getCreatedTime());
         holder.textView_doneCount.setText(String.valueOf(currentShopList.getDoneCount()));
@@ -57,6 +61,26 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                 mBuilder.setView(dialogView);
                 final AlertDialog dialog = mBuilder.create();
 
+                dialogView.findViewById(R.id.button_archiveList).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(mContext, "Archived!", Toast.LENGTH_SHORT).show();
+                        currentShopList.setArchived(true);
+                        dialog.dismiss();
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("lists").child(currentShopList.getId()).child("archived");
+                        databaseReference.setValue(true);
+                        shoppingLists.remove(position);
+                        notifyItemRemoved(position);
+                    }
+                });
+
+                dialogView.findViewById(R.id.button_addItem).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addNewItemDialogView();
+                    }
+                });
+
                 RecyclerView recyclerView_shoppingListDetails = dialogView.findViewById(R.id.recyclerView_itemList);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
                 recyclerView_shoppingListDetails.setLayoutManager(layoutManager);
@@ -68,6 +92,20 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                 dialog.show();
             }
         });
+    }
+
+    private void addNewItemDialogView() {
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        final View dialogView = inflater.inflate(R.layout.dialog_listofitems, null);
+        mBuilder.setView(dialogView);
+        final AlertDialog dialog = mBuilder.create();
+
+
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
 

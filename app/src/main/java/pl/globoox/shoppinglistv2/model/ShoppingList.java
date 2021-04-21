@@ -10,7 +10,7 @@ public class ShoppingList {
     private String id;
     private String name;
     private String createdTime;
-    private boolean isArchived;
+    private boolean archived;
     private HashMap<String, Item> items;
 
     public int getItemsCount() {
@@ -42,11 +42,11 @@ public class ShoppingList {
     }
 
     public boolean isArchived() {
-        return isArchived;
+        return archived;
     }
 
     public void setArchived(boolean archived) {
-        isArchived = archived;
+        this.archived = archived;
     }
 
     public List<Item> getItems() {

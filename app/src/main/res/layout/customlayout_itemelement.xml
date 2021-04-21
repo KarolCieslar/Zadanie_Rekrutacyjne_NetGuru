@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_weight="75"
+            android:layout_weight="82"
             android:orientation="horizontal">
 
             <TextView
@@ -54,7 +54,7 @@
             android:id="@+id/imageView_deleteItem"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="15"
+            android:layout_weight="8"
             android:src="@drawable/ic_delete">
 
 

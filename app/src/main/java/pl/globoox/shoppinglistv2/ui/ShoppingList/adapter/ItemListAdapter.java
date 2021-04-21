@@ -50,23 +50,37 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
     public void onBindViewHolder(@NonNull final ItemListAdapter.ViewHolder holder, final int position) {
         holder.textView_itemName.setText(itemList.get(position).getName());
         holder.textView_itemValue.setText(String.valueOf(itemList.get(position).getValue()));
+        holder.itemView.setAlpha(itemList.get(position).getAlpha());
 
         holder.imageView_deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "Deleted!", Toast.LENGTH_SHORT).show();
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("lists").child(shopList.getId());
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("lists").child(shopList.getId()).child("items").child(itemList.get(position).getId());
                 databaseReference.removeValue();
+                itemList.remove(position);
+                notifyItemRemoved(position);
             }
         });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("lists").child(shopList.getId()).child(itemList.get(position).getId()).child("status");
-                databaseReference.setValue("done");
+                processStatus(position, holder);
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("lists").child(shopList.getId()).child("items").child(itemList.get(position).getId()).child("status");
+                databaseReference.setValue(itemList.get(position).getStatus());
             }
         });
+
+    }
+
+    private void processStatus(int position, @NonNull ViewHolder holder) {
+        if (itemList.get(position).getStatus().equalsIgnoreCase("done")){
+            itemList.get(position).setStatus("active");
+        } else {
+            itemList.get(position).setStatus("done");
+        }
+        holder.itemView.setAlpha(itemList.get(position).getAlpha());
     }
 
 

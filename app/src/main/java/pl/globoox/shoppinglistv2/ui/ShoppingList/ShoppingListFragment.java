@@ -34,24 +34,28 @@ public class ShoppingListFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_shopping_list, container, false);
 
         listOfShoppingLists = new ArrayList<>();
-        firebaseDatabase.getReference("lists").orderByChild("owner").equalTo("userid").addListenerForSingleValueEvent(new ValueEventListener() {
+        firebaseDatabase.getReference("lists").orderByChild("owner").equalTo("globooxmail@gmail.com").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot snapshot) {
                 ProgressBar progressBar_shopList = rootView.findViewById(R.id.progressBar_shopList);
                 progressBar_shopList.setVisibility(View.GONE);
 
-                if (!snapshot.exists()) {
-                    rootView.findViewById(R.id.textView_noData).setVisibility(View.VISIBLE);
-                    return;
-                }
-
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    listOfShoppingLists.add(data.getValue(ShoppingList.class));
+                    ShoppingList newShopList = data.getValue(ShoppingList.class);
+                    newShopList.setId(data.getKey());
+                    if (!newShopList.isArchived()) {
+                        listOfShoppingLists.add(newShopList);
+                    }
                     RecyclerView recyclerView_shoppingList = rootView.findViewById(R.id.recyclerView_shoppingList);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                     recyclerView_shoppingList.setLayoutManager(layoutManager);
                     ShoppingListAdapter adapter = new ShoppingListAdapter(getContext(), listOfShoppingLists);
                     recyclerView_shoppingList.setAdapter(adapter);
+                }
+
+
+                if (listOfShoppingLists.size() == 0){
+                    rootView.findViewById(R.id.textView_noData).setVisibility(View.VISIBLE);
                 }
             }
 

@@ -5,6 +5,14 @@ public class Item {
     private String name;
     private int value;
     private String status;
+    private float alpha;
+
+    public float getAlpha() {
+        if (getStatus().equalsIgnoreCase("done")) {
+            return 0.5f;
+        }
+        return 1f;
+    }
 
     public String getName() {
         return name;
