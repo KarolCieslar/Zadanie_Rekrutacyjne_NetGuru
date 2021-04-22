@@ -2,6 +2,7 @@ package pl.globoox.shoppinglistv2.ui.ShoppingList;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,15 +63,15 @@ public class ShoppingListFragment extends Fragment {
                     if (!newShopList.isArchived()) {
                         listOfShoppingLists.add(newShopList);
                     }
-
-                    sortShoppingList();
-                    createAdapter();
                 }
 
                 // If list are empty swhow noData textView
                 if (listOfShoppingLists.size() == 0) {
                     rootView.findViewById(R.id.textView_noData).setVisibility(View.VISIBLE);
                 }
+
+                sortShoppingList();
+                createAdapter();
             }
 
             @Override
