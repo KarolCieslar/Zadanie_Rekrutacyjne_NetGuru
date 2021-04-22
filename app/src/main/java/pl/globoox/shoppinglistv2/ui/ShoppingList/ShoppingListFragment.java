@@ -110,6 +110,8 @@ public class ShoppingListFragment extends Fragment {
 
                         listOfShoppingLists.add(newList);
                         adapter.notifyDataSetChanged();
+
+                        dialog.dismiss();
                     }
                 });
 

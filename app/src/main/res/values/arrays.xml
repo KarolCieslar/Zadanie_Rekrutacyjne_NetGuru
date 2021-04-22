@@ -1,44 +1,10 @@
 <resources>
     <!-- Reply Preference -->
-    <string-array name="vibrationPower_value">
-        <item>500</item>
-        <item>1000</item>
-        <item>2000</item>
-        <item>3000</item>
-        <item>4000</item>
+    <string-array name="hireMeName">
+        <item>Oj jak bardzo bym chciał!</item>
+        <item>Noo chciałbym!</item>
+        <item>Może...</item>
+        <item>2/10</item>
+        <item>Niech pracuje nadal na produkcji...</item>
     </string-array>
-
-    <string-array name="vibrationPower_name">
-        <item>Wibruj co pół sekundy</item>
-        <item>Wibruj co sekundę</item>
-        <item>Wibruj co dwie sekundy</item>
-        <item>Wibruj co trzy sekundy</item>
-        <item>Wibruj co cztery sekundy</item>
-    </string-array>
-
-
-    <!-- Reply Preference -->
-    <string-array name="alarmSound_value">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-    </string-array>
-
-    <string-array name="alarmSound_name">
-        <item>Dźwięk 1</item>
-        <item>Dźwięk 2</item>
-        <item>Dźwięk 3</item>
-        <item>Dźwięk 4</item>
-        <item>Dźwięk 5</item>
-        <item>Dźwięk 6</item>
-        <item>Dźwięk 7</item>
-        <item>Dźwięk 8</item>
-    </string-array>
-
-
 </resources>

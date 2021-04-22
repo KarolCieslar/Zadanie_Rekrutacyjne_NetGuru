@@ -8,89 +8,62 @@
 
     <PreferenceCategory
         android:key="phone"
-        android:title="WŁĄCZ LUB WYŁĄCZ APLIKACJĘ">
+        android:title="PIERWSZE WRAŻENIA">
 
         <SwitchPreference
             android:defaultValue="true"
-            android:key="disableapp"
-            android:summary="Odznacz te opcję jeśli chcesz aby aplikacja była wyłączona. Funkcja ta przydaje się w przypadku gdy chcesz na jakiś czas wyłączyć alarmy."
-            android:title="Czy aplikacja ma być włączona?" />
+            android:key="needToCheckIt"
+            android:summary="Zaznacz tą opcję jeśli chcesz aby osoba, która stworzyła aplikację była zadowolona!"
+            android:title="Czy aplikacja Ci śie podoba?" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="phone"
-        android:title="Ustawienia podstawowe">
+        android:title="CIEKAWE PYTANKA">
 
         <SwitchPreference
             android:defaultValue="false"
-            android:dependency="disableapp"
-            android:key="only_sms"
-            android:summary="W przypadku zaznaczenia tej opcji telefon będzie reagował jedynie na SMS z remizy. Natomiast gdy zadzwoni telefon z remizy alarm nie zostanie włączony."
-            android:title="Reaguj tylko na SMS?" />
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:dependency="disableapp"
-            android:key="switch_reaction"
-            android:summary="Włączenie tej opcji dodaje suwak na ekranie alarmu. Aby wyłączyć alarm będzie trzeba przesunąć palcem suwak od lewej do prawej. Gdy ta opcja jest odznaczona alarm wyłącza się po kliknięciu w ekran."
-            android:title="Suwak wyłączający alarm" />
+            android:dependency="needToCheckIt"
+            android:key="appIsGood"
+            android:summary="Jesli uważasz, że aplikacja mogłaby być stworzona lepiej proszę o zaznaczenie tej opcji. Polecamy jednak zostawić ją odznaczoną ze względu na lepszą wydajność apki."
+            android:title="Czy aplikacja mogłaby być lepsza?" />
 
         <EditTextPreference
-            android:defaultValue="phoneNumber1"
-            android:dependency="disableapp"
-            android:key="phoneNumber1"
-            android:title="Telefon z remizy #1" />
+            android:defaultValue="suggest1"
+            android:dependency="appIsGood"
+            android:key="suggest1"
+            android:summary="Zostaw tutaj coś od siebie!"
+            android:title="Sugestia 1" />
 
         <EditTextPreference
-            android:defaultValue="phoneNumber2"
-            android:dependency="disableapp"
-            android:key="phoneNumber2"
-            android:title="Telefon z remizy #2" />
-
-        <EditTextPreference
-            android:defaultValue="smsText"
-            android:dependency="disableapp"
-            android:key="smsText"
-            android:title="Tekst wiadomości SMS" />
+            android:defaultValue="suggest2"
+            android:dependency="appIsGood"
+            android:key="suggest2"
+            android:summary="I tutaj też można..."
+            android:title="Sugestia 2" />
     </PreferenceCategory>
 
 
     <PreferenceCategory
         android:key="alarm"
-        android:title="Ustawienia alarmu">
+        android:title="PRZYSZLY PRACOWNIK">
 
 
         <SwitchPreference
             android:defaultValue="true"
-            android:dependency="disableapp"
-            android:key="alarm_vibration"
-            android:summary="Czy włączyć wibracje podczas alarmu?"
-            android:title="Wibracje" />
+            android:dependency="needToCheckIt"
+            android:key="wantToHire"
+            android:summary="Czy chciałbyś aby rekrutowana osoba została zatrudniona?"
+            android:title="Zaznacz tę opcję" />
 
         <ListPreference
             android:defaultValue="1000"
-            android:dependency="alarm_vibration"
-            android:entries="@array/vibrationPower_name"
-            android:entryValues="@array/vibrationPower_value"
-            android:key="alarm_vibration_list"
-            android:summary="Wybierz siłę wibracji"
-            android:title="Wybierz siłę wybracji podczas alarmu" />
-
-        <SwitchPreference
-            android:defaultValue="true"
-            android:dependency="disableapp"
-            android:key="alarm_sound"
-            android:summary="Czy włączyć dźwięk podczas alarmu?"
-            android:title="Dźwięk" />
-
-        <ListPreference
-            android:defaultValue="1"
-            android:dependency="alarm_sound"
-            android:entries="@array/alarmSound_name"
-            android:entryValues="@array/alarmSound_value"
-            android:key="alarm_sound_list"
-            android:summary="Wybierz dźwięk alarmu"
-            android:title="Wybierz dźwięk alarmu" />
+            android:dependency="wantToHire"
+            android:entries="@array/hireMeName"
+            android:entryValues="@array/hireMeName"
+            android:key="wantToHire_list"
+            android:summary="Zaznacz jak bardzo chcesz pracować z twórcą tej apki!"
+            android:title="Wybierz 1szą opcję!" />
     </PreferenceCategory>
 
 </PreferenceScreen>

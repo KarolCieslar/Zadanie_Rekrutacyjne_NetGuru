@@ -15,14 +15,13 @@
         android:layout_margin="10dp"
         android:weightSum="100">
 
-        <ImageView
+        <CheckBox
+            android:id="@+id/checkBox_status"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:src="@drawable/ic_notifications_black_24dp" />
+            android:layout_weight="10" />
 
         <LinearLayout
-            android:id="@+id/relativeLayout_post"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"

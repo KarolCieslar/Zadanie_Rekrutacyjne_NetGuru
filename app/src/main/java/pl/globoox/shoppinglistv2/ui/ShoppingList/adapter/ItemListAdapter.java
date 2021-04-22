@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,7 +55,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
         // Set name, value and alpha
         holder.textView_itemName.setText(itemList.get(position).getName());
         holder.textView_itemValue.setText(String.valueOf(itemList.get(position).getValue()));
-        holder.itemView.setAlpha(itemList.get(position).getAlpha());
+        processStatus(position, holder, true);
 
         // Set onClickListener on delete item button
         holder.imageView_deleteItem.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +75,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processStatus(position, holder);
+                processStatus(position, holder, false);
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("lists").child(shopList.getId()).child("items").child(itemList.get(position).getId()).child("status");
                 databaseReference.setValue(itemList.get(position).getStatus());
             }
@@ -84,11 +85,17 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
 
     /* Process status method
     This method change status and alpha */
-    private void processStatus(int position, @NonNull ViewHolder holder) {
+    private void processStatus(int position, @NonNull ViewHolder holder, boolean initialize) {
         if (itemList.get(position).getStatus().equalsIgnoreCase("done")) {
-            itemList.get(position).setStatus("active");
+            if (!initialize) {
+                itemList.get(position).setStatus("active");
+            }
+            holder.checkBox_status.setChecked(true);
         } else {
-            itemList.get(position).setStatus("done");
+            if (!initialize) {
+                itemList.get(position).setStatus("done");
+            }
+            holder.checkBox_status.setChecked(false);
         }
         holder.itemView.setAlpha(itemList.get(position).getAlpha());
     }
@@ -101,7 +108,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textView_listName;
+        CheckBox checkBox_status;
         TextView textView_itemName;
         TextView textView_itemValue;
         ImageView imageView_deleteItem;
@@ -110,7 +117,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
-            textView_listName = itemView.findViewById(R.id.textView_listName);
+            checkBox_status = itemView.findViewById(R.id.checkBox_status);
             textView_itemName = itemView.findViewById(R.id.textView_itemName);
             textView_itemValue = itemView.findViewById(R.id.textView_itemValue);
             imageView_deleteItem = itemView.findViewById(R.id.imageView_deleteItem);

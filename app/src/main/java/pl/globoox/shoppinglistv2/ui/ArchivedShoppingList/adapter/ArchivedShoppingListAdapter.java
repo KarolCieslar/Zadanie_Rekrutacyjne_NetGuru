@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -51,7 +52,7 @@ public class ArchivedShoppingListAdapter extends RecyclerView.Adapter<ArchivedSh
         final ShoppingList currentShopList = shoppingLists.get(position);
 
         holder.textView_name.setText(currentShopList.getName());
-        holder.textView_createdTime.setText(String.valueOf(getDateFromUnix(currentShopList)));
+        holder.textView_createdTime.setText(getDateFromUnix(currentShopList));
         holder.textView_doneCount.setText(String.valueOf(currentShopList.getDoneCount()));
         holder.textView_maxCount.setText(String.valueOf(currentShopList.getItemsCount()));
 
@@ -81,10 +82,12 @@ public class ArchivedShoppingListAdapter extends RecyclerView.Adapter<ArchivedSh
         });
     }
 
-    private Date getDateFromUnix(ShoppingList currentShopList) {
+    private String getDateFromUnix(ShoppingList currentShopList) {
         Date date = new Date();
         date.setTime(currentShopList.getCreatedTime() * 1000);
-        return date;
+        String pattern = "dd-MM-yyyy HH:mm";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
     }
 
     @Override

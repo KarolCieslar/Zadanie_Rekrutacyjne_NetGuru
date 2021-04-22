@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -67,10 +68,12 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         });
     }
 
-    private Date getDateFromUnix(ShoppingList currentShopList) {
+    private String getDateFromUnix(ShoppingList currentShopList) {
         Date date = new Date();
         date.setTime(currentShopList.getCreatedTime() * 1000);
-        return date;
+        String pattern = "dd-MM-yyyy HH:mm";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
     }
 
 
@@ -94,6 +97,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             dialogView.findViewById(R.id.textView_noItemsData).setVisibility(View.VISIBLE);
         }
 
+        TextView textView_listName = dialogView.findViewById(R.id.textView_listName);
+        textView_listName.setText(currentShopList.getName());
 
         // Set onClickListener on archive button
         dialogView.findViewById(R.id.button_archiveList).setOnClickListener(new View.OnClickListener() {

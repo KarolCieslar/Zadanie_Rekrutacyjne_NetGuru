@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/navigation_ArchivedShoppingList"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_archivedlist"
         android:title="@string/nav_title_ArchivedShoppingList" />
 
     <item
         android:id="@+id/navigation_ShoppingList"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_cart"
         android:title="@string/nav_title_ShoppingList" />
 
 </menu>

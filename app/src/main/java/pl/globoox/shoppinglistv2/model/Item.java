@@ -24,7 +24,7 @@ public class Item {
 
     public float getAlpha() {
         if (getStatus().equalsIgnoreCase("done")) {
-            return 0.5f;
+            return 0.7f;
         }
         return 1f;
     }

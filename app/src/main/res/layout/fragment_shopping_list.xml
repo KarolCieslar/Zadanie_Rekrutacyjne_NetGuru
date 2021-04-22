@@ -8,13 +8,14 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatButton_addList"
-        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_cart"
         android:layout_marginBottom="80dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:elevation="5dp"
+        android:src="@drawable/ic_plus" />
 
     <ProgressBar
         android:id="@+id/progressBar_shopList"
