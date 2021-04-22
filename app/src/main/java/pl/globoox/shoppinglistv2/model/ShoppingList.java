@@ -1,5 +1,7 @@
 package pl.globoox.shoppinglistv2.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,20 +11,33 @@ public class ShoppingList {
 
     private String id;
     private String name;
-    private String createdTime;
+    private long createdTime;
     private boolean archived;
     private HashMap<String, Item> items;
+
+    public ShoppingList() {
+    }
+
+    public ShoppingList(String id, String name, long createdTime) {
+        this.id = id;
+        this.name = name;
+        this.createdTime = createdTime;
+    }
+
+    public long getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(long createdTime) {
+        this.createdTime = createdTime;
+    }
 
     public int getItemsCount() {
         return getItems().size();
     }
 
-    public void removeItem(String id) {
-        for (Map.Entry<String, Item> entry : this.items.entrySet()) {
-            if (entry.getValue().getId().equalsIgnoreCase(id)) {
-                items.remove(entry.getKey());
-            }
-        }
+    public void addItem(Item item) {
+        this.items.put(item.getId(), item);
         getItems();
     }
 
@@ -40,14 +55,6 @@ public class ShoppingList {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
     }
 
     public boolean isArchived() {
@@ -78,6 +85,17 @@ public class ShoppingList {
             }
         }
         return i;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", this.name);
+        result.put("createdTime", this.createdTime);
+        result.put("archived", false);
+        result.put("owner", "globooxmail@gmail.com"); // HARDCODED OWNER CUZ WE DO NOT HAVE LOGIN SYSTEM
+
+        return result;
     }
 
 

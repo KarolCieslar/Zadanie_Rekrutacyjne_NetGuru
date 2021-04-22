@@ -28,14 +28,13 @@ public class ArchivedShoppingListFragment extends Fragment {
     View rootView;
 
     public static ArrayList<ShoppingList> listOfShoppingLists;
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_archived_shopping_list, container, false);
 
         listOfShoppingLists = new ArrayList<>();
-        firebaseDatabase.getReference("lists").orderByChild("owner").equalTo("globooxmail@gmail.com").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("lists").orderByChild("owner").equalTo("globooxmail@gmail.com").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot snapshot) {
                 ProgressBar progressBar_shopList = rootView.findViewById(R.id.progressBar_shopList);
@@ -48,15 +47,12 @@ public class ArchivedShoppingListFragment extends Fragment {
                     if (newShopList.isArchived()) {
                         listOfShoppingLists.add(newShopList);
                     }
-                    RecyclerView recyclerView_shoppingList = rootView.findViewById(R.id.recyclerView_shoppingList);
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                    recyclerView_shoppingList.setLayoutManager(layoutManager);
-                    ArchivedShoppingListAdapter adapter = new ArchivedShoppingListAdapter(getContext(), listOfShoppingLists);
-                    recyclerView_shoppingList.setAdapter(adapter);
+
+                    createAdapter();
                 }
 
                 // Display textView if no data exists
-                if (listOfShoppingLists.size() == 0){
+                if (listOfShoppingLists.size() == 0) {
                     rootView.findViewById(R.id.textView_noData).setVisibility(View.VISIBLE);
                 }
             }
@@ -69,5 +65,13 @@ public class ArchivedShoppingListFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    private void createAdapter() {
+        RecyclerView recyclerView_shoppingList = rootView.findViewById(R.id.recyclerView_shoppingList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView_shoppingList.setLayoutManager(layoutManager);
+        ArchivedShoppingListAdapter adapter = new ArchivedShoppingListAdapter(getContext(), listOfShoppingLists);
+        recyclerView_shoppingList.setAdapter(adapter);
     }
 }

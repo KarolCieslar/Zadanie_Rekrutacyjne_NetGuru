@@ -19,6 +19,7 @@ public class Item {
         this.id = id;
         this.name = name;
         this.value = value;
+        this.status = "active";
     }
 
     public float getAlpha() {

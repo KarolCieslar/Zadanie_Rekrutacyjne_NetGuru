@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.ShoppingList.ShoppingListFragment">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButton_addList"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_cart"
+        android:layout_marginBottom="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
     <ProgressBar
         android:id="@+id/progressBar_shopList"
         android:layout_width="100dp"
@@ -15,15 +25,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_shoppingList"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="10dp" />
 
     <TextView
         android:id="@+id/textView_noData"
         android:layout_width="wrap_content"
-        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/listEmpty" />
+        android:text="@string/listEmpty"
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import pl.globoox.shoppinglistv2.R;
 import pl.globoox.shoppinglistv2.model.ShoppingList;
@@ -50,7 +51,7 @@ public class ArchivedShoppingListAdapter extends RecyclerView.Adapter<ArchivedSh
         final ShoppingList currentShopList = shoppingLists.get(position);
 
         holder.textView_name.setText(currentShopList.getName());
-        holder.textView_createdTime.setText(currentShopList.getCreatedTime());
+        holder.textView_createdTime.setText(String.valueOf(getDateFromUnix(currentShopList)));
         holder.textView_doneCount.setText(String.valueOf(currentShopList.getDoneCount()));
         holder.textView_maxCount.setText(String.valueOf(currentShopList.getItemsCount()));
 
@@ -80,6 +81,11 @@ public class ArchivedShoppingListAdapter extends RecyclerView.Adapter<ArchivedSh
         });
     }
 
+    private Date getDateFromUnix(ShoppingList currentShopList) {
+        Date date = new Date();
+        date.setTime(currentShopList.getCreatedTime() * 1000);
+        return date;
+    }
 
     @Override
     public int getItemCount() {

@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 import pl.globoox.shoppinglistv2.R;
@@ -52,7 +53,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         final ShoppingList currentShopList = shoppingLists.get(position);
 
         holder.textView_name.setText(currentShopList.getName());
-        holder.textView_createdTime.setText(currentShopList.getCreatedTime());
+        holder.textView_createdTime.setText(String.valueOf(getDateFromUnix(currentShopList)));
         holder.textView_doneCount.setText(String.valueOf(currentShopList.getDoneCount()));
         holder.textView_maxCount.setText(String.valueOf(currentShopList.getItemsCount()));
 
@@ -66,6 +67,12 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         });
     }
 
+    private Date getDateFromUnix(ShoppingList currentShopList) {
+        Date date = new Date();
+        date.setTime(currentShopList.getCreatedTime() * 1000);
+        return date;
+    }
+
 
     /* Display dialog with items and form
      where user can add new item to list */
@@ -76,7 +83,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         mBuilder.setView(dialogView);
         final AlertDialog dialog = mBuilder.create();
 
-        RecyclerView recyclerView_shoppingListDetails = dialogView.findViewById(R.id.recyclerView_itemList);
+        final RecyclerView recyclerView_shoppingListDetails = dialogView.findViewById(R.id.recyclerView_itemList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         recyclerView_shoppingListDetails.setLayoutManager(layoutManager);
         final ItemListAdapter adapter = new ItemListAdapter(mContext, currentShopList.getItems(), currentShopList);
@@ -143,8 +150,9 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                 Map<String, Object> values = newItem.toMap();
                 FirebaseDatabase.getInstance().getReference().child("lists").child(currentShopList.getId()).child("items").child(id).setValue(values);
 
-                currentShopList.getItems().add(newItem);
-                adapter.notifyItemInserted(currentShopList.getItemsCount());
+                currentShopList.addItem(newItem);
+                final ItemListAdapter adapter = new ItemListAdapter(mContext, currentShopList.getItems(), currentShopList);
+                recyclerView_shoppingListDetails.setAdapter(adapter);
 
             }
         });

@@ -63,7 +63,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
                 Toast.makeText(mContext, R.string.itemRemoved, Toast.LENGTH_SHORT).show();
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("lists").child(shopList.getId()).child("items").child(itemList.get(position).getId());
                 databaseReference.removeValue();
-                shopList.removeItem(itemList.get(position).getId());
                 itemList.remove(position);
                 notifyDataSetChanged();
 
